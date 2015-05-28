@@ -1,7 +1,12 @@
+#==============================================
+# Simple test application using Flask and React. 
+# Single dashboard page at root "/". Loads 
+# JavaScript resources at bottom of page to 
+# reduce page load time.
+#==============================================
 import os
 from flask import Flask, render_template
 
-#app = Flask(__name__, static_url_path='', static_folder='static')
 app = Flask(__name__)
 
 @app.route('/')
