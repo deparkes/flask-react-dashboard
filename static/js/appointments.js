@@ -1,3 +1,6 @@
+/*
+ * Sample JSON appointment data
+ */
 var appointmentData = [
   {
     "created_at": "2015-04-21T10:44:51-06:00", 
@@ -23,6 +26,9 @@ var appointmentData = [
   } 
 ];
 
+/*
+ * Top level appointment container
+ */
 var AppointmentSection = React.createClass({
   render: function() {
     return (
@@ -35,6 +41,9 @@ var AppointmentSection = React.createClass({
   }
 });
 
+/*
+ * Container for individual appointment components
+ */
 var AppointmentList = React.createClass({
   render: function() {
     var appointmentNodes = this.props.listData.map(function(appointment) {
@@ -50,7 +59,11 @@ var AppointmentList = React.createClass({
     );
   }
 });
-  
+
+
+/*
+ * Appointment component
+ */
 var AppointmentItem = React.createClass({
   render: function() {
     return (

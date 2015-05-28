@@ -1,3 +1,6 @@
+/*
+ * Sample JSON appointment data
+ */
 var doctorData = [
   {
     "name": "Hannibal Lecter", 
@@ -25,6 +28,9 @@ var doctorData = [
   },
 ];
 
+/*
+ * Top level doctor container
+ */
 var DoctorSection = React.createClass({
   render: function() {
     return (
@@ -33,6 +39,9 @@ var DoctorSection = React.createClass({
   }
 });
 
+/*
+ * Container for individual doctor components
+ */
 var DoctorGrid = React.createClass({
   render: function() {
     var doctorNodes = this.props.gridData.map(function(doctor) {
@@ -49,6 +58,9 @@ var DoctorGrid = React.createClass({
   }
 });
 
+/*
+ * Doctor component
+ */
 var DoctorItem = React.createClass({
   render: function() {
     return (
