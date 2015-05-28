@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Booking system">
+    <meta name="author" content="Some Guy">
+
+    <title>Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      div.spacer {
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+</html>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" 
+          data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Company Name</a>
+      </div><!-- .navbar-header -->
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#">About</a>
+          </li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#">
+              <span class="glyphicon glyphicon-envelope"></span>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+              role="button" aria-expanded="false">
+              <span class="glyphicon glyphicon-user"></span> 
+              mross <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="#">
+                  <span class="glyphicon glyphicon-cog"></span> Account
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="glyphicon glyphicon-log-out"></span> Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div><!-- .container -->
+  </nav>
+
+  <div class="row spacer">
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Welcome back!</h1>
+        <p>
+          Been a while since your last visit? 
+          <a class="btn btn-success btn-lg" href="#">
+            <span class="glyphicon glyphicon-search"></span>
+            Find a doctor
+          </a>
+        </p>
+      </div>
+    </div>
+  </div><!-- .row space -->
+
+  <div class="row">
+    <div class="container">
+      <div class="col-sm-3">
+        <img class="img img-responsive" src="http://placehold.it/200x200" />
+        <h3>Mike Ross</h3>
+        <p>
+          <span class="glyphicon glyphicon-calendar"></span> 
+          Joined 21 days ago
+        </p>
+      </div>
+
+      <div class="col-sm-9">
+        <div id="appointment">
+        </div><!-- #appointment -->
+      </div>
+    </div><!-- .container -->
+  </div><!-- .row -->
+
+  <div class="row">
+    <div class="container">
+      <div class="col-sm-12">
+        <h2>Featured Doctors</h2>
+
+        <div id="featured_doctors">
+        </div><!-- #featured_doctors -->
+      </div>
+    </div>
+  </div><!-- .row -->
+
+  <script src="https://fb.me/react-0.13.3.js"></script>
+  <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script type="text/jsx">
+    var appointmentData = [
+      {
+        "created_at": "2015-04-21T10:44:51-06:00", 
+        "end": "2015-04-24T07:30:00-06:00", 
+        "id": 695, 
+        "patient_id": 16, 
+        "physician_id": 14, 
+        "start": "2015:04-24T07:00:00-06:00", 
+        "updated_at": "2015:04-21T10:44:51-06:00", 
+        "patient_name": "Mike Ross", 
+        "physician_name": "Gregory House"
+      }, 
+      {
+        "created_at": "2015-04-21T12:40:51-06:00", 
+        "end": "2015-04-30T10:30:00-06:00", 
+        "id": 696, 
+        "patient_id": 16, 
+        "physician_id": 15, 
+        "start": "2015:04-30T10:00:00-06:00", 
+        "updated_at": "2015:04-21T11:44:51-06:00", 
+        "patient_name": "Mike Ross", 
+        "physician_name": "James Wilson"
+      } 
+    ];
+
+    var AppointmentSection = React.createClass({
+      render: function() {
+        return (
+          <div className="appointmentSection">
+            <h2>Upcoming Appointments</h2>
+
+            <AppointmentList listData={this.props.appointmentData} />
+          </div>
+        );
+      }
+    });
+
+    var AppointmentList = React.createClass({
+      render: function() {
+        var appointmentNodes = this.props.listData.map(function(appointment) {
+          return (
+            <AppointmentItem appointment={appointment} />
+          );
+        });
+
+        return (
+          <div className="appointmentList">
+            {appointmentNodes}
+          </div>
+        );
+      }
+    });
+
+    var AppointmentItem = React.createClass({
+      render: function() {
+        return (
+          <div className="alert alert-info">
+            <h3>
+              <a href="#"> 
+                {this.props.appointment.physician_name}
+              </a>
+            </h3>
+            <p>
+              <strong>Start:</strong> {this.props.appointment.start}
+            </p>
+            <p>
+              <strong>End:</strong> {this.props.appointment.end}
+            </p>
+          </div>
+        );
+      }
+    });
+
+    React.render(
+      <AppointmentSection appointmentData={appointmentData} />, 
+      document.getElementById('appointment')
+    );
+
+    var doctorData = [
+      {
+        "name": "Hannibal Lecter", 
+        "rating": 5, 
+        "description": "World famous psychiatrist",
+        "profile_url": "#",
+      },
+      {
+        "name": "Frasier Crane", 
+        "rating": 4.7, 
+        "description": "Radio personality and psychiatrist",
+        "profile_url": "#",
+      },
+      {
+        "name": "Doogie Howser", 
+        "rating": 4.6, 
+        "description": "Exceptional teenage physician",
+        "profile_url": "#",
+      },
+      {
+        "name": "Douglas Ross", 
+        "rating": 4.5, 
+        "description": "Renowned pediatric physician",
+        "profile_url": "#",
+      },
+    ];
+
+    var DoctorSection = React.createClass({
+      render: function() {
+        return (
+          <DoctorGrid gridData={this.props.doctorData} />
+        );
+      }
+    });
+
+    var DoctorGrid = React.createClass({
+      render: function() {
+        var doctorNodes = this.props.gridData.map(function(doctor) {
+          return (
+            <DoctorItem doctor={doctor} />
+          );
+        });
+
+        return (
+          <div className="doctorGrid">
+            {doctorNodes}
+          </div>
+        );
+      }
+    });
+
+    var DoctorItem = React.createClass({
+      render: function() {
+        return (
+          <div className="col-sm-3 text-center">
+            <div className="thumbnail">
+              <img src="//placehold.it/800x500" />
+              <div class="caption">
+                <h3>{this.props.doctor.name}</h3>
+                <p>{this.props.doctor.description}</p>
+                <p>
+                  <a className="btn btn-primary" href="#">
+                    Schedule
+                  </a>
+                  <a className="btn btn-default" 
+                    href="#">
+                    See Profile
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      }
+    });
+
+    React.render(
+      <DoctorSection doctorData={doctorData} />, 
+      document.getElementById('featured_doctors')
+    );
+
+  </script>
+</body>
